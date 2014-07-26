@@ -1,18 +1,24 @@
 <html>
 <head>
 <title>EverNote</title>
+
+<link rel="stylesheet" type="text/css" href="app.css">
 </head>
 <body>
 <h1>EverNote</h1>
 <div id="addPanel">
 <form> 
-<h3>Add New Note</h3>
-<input type="text" placeholder="Enter your title">
-<input type="textarea" placeholder="Enter your body">
-<button value="Add"/>
+<h2>Add New Note</h2>
+<label id="successLbl">New Note Added </label><br/>
+<input type="text" placeholder="Enter your note title" id="noteTitle" onchange="clearMsg()"><br/>
+<textarea  placeholder="Enter your details" id="noteDesc"></textarea><br/>
+<button type="button" onclick="add()">Add New</button>
+
 </form>
 </div>
-<div id="displayPanel">
+<div id="displayPanel" >
+<h2>Display Notes</h2>
 </div>
+<script src="controller.js"></script>
 </body>
 </html>

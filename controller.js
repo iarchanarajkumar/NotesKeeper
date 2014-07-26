@@ -3,41 +3,67 @@
 var notesStr = '{"Notes":[]}';
 var titletxt=document.getElementById("noteTitle");
 var detailtxt=document.getElementById("noteDesc");
-//var successLbl=document.getElementById("successLbl");
-//var displayNotes=document.getElementById("display");
+var successLbl=document.getElementById("successLbl");
+var displayNotes=document.getElementById("displayPanel");
 
 function clearMsg(){
-successLbl.value = '';
+successLbl.style.display = "none";
+
 }
 
-function submit(){
+function addNdisplay(){
 add();
-display();
+//display();
 }
 
 function add(){
-var obj = JSON.parse(notesStr) ;
+//var obj = JSON.parse(notesStr) ;
 var a=titletxt.value;
 var b=detailtxt.value;
-obj['Notes'].push({"title":a,"body":b});
-notesStr = JSON.stringify(obj);
-console.log("hi");
-//successLbl.innerHTML="\u2713 Object Added ";
+var noteDiv, noteBody, noteTitle;
+displayNotes.style.display="block";
+	noteDiv=document.createElement('div');
+	//noteDiv.innerHTML=note.body;
+	noteDiv.className="noteDisplayDiv";
+	
+	noteTitle=document.createElement('div');
+	noteTitle.innerHTML=a;
+	noteTitle.className="noteTitleDisplayDiv";
+	noteDiv.appendChild(noteTitle);
+	
+	
+	noteBody=document.createElement('div');
+	noteBody.innerHTML=b;
+	noteBody.className="noteBodyDisplayDiv";
+	noteDiv.appendChild(noteBody);
+	
+	removeBtn=document.createElement('button');
+	removeBtn.innerHTML='&#215;';
+	removeBtn.className="removeBtnClass";
+	removeBtn.onclick=function(){
+	displayNotes.removeChild(noteDiv);}
+	noteDiv.appendChild(removeBtn);
+	
+	
+	
+	displayNotes.appendChild(noteDiv);
+
+//obj['Notes'].push({"title":a,"body":b});
+//notesStr = JSON.stringify(obj);
+successLbl.style.display = "block";
+
 titletxt.value="";
 detailtxt.value="";
 
 }
 
 function display(){
-var displayBox="";
+
+
 var jsonData = JSON.parse(notesStr);
-for (var i = 0; i < jsonData.Notes.length; i++) {
-    var note = jsonData.Notes[i];
-    console.log(note.body);
-displayBox+=note.body+ " "  ;
-}
-displayBox=displayNotes.add('div');
-displayBox.innerHTML=displayNotes.value;
+    var note = jsonData.Notes[--jsonData.Notes.length];
+	console.log(note);
+	
 }
 
 
